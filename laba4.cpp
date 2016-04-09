@@ -45,6 +45,16 @@ int main()
 	//cout << ~matr1 << endl;
 	cout << "matr1: \n" << matr1 << "matr2: \n" << matr2 << "matr3: \n" << matr3 << endl;
 	cout << "matr1(1,1) = " << Matrindex(matr1, 1, 1) << endl;
+	//Запись в файл при использовании потоков
+	ofstream out("text.txt", ios::app);
+	if (!out)
+	{
+		cout << "Create a file first \n";
+		system("pause");
+		return 0;
+	}
+	out << matr1 << endl;
+	out.close();
 	system("pause");
 	return 0;
 }
