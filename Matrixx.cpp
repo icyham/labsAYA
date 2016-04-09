@@ -7,36 +7,42 @@ Matrixx::Matrixx(void)
 	data = NULL;
 	row = 0;
 	col = 0;
+	del = 0;
 }
-Matrixx::Matrixx(int x) //квадратная матрица
+Matrixx::Matrixx(int x) //РєРІР°РґСЂР°С‚РЅР°СЏ РјР°С‚СЂРёС†Р°
 {
-	data = new double[x*x];
+	Complex a(0);
+	data = new Complex[x*x];
 	row = x;
 	col = x;
-	for (int i=0; i<row; i++)
+	del = 0;
+	for (int i = 0; i<row; i++)
 	{
-		for (int j=0; j<col; j++)
+		for (int j = 0; j<col; j++)
 		{
-		data[i*col+j] = 0;
+			data[i*col + j] = a;
 		}
 	}
 }
-Matrixx::Matrixx(int x, int y) //  строчки и столбцы
+Matrixx::Matrixx(int x, int y) //  СЃС‚СЂРѕС‡РєРё Рё СЃС‚РѕР»Р±С†С‹
 {
-	data = new double[x*y];
+	Complex a(0);
+	data = new Complex[x*y];
 	row = x;
 	col = y;
-	for (int i=0; i<row; i++)
+	del = 0;
+	for (int i = 0; i<row; i++)
 	{
-		for (int j=0; j<col; j++)
+		for (int j = 0; j<col; j++)
 		{
-		data[i*col+j] = 0;
+			data[i*col + j] = a;
 		}
 	}
 }
 Matrixx::~Matrixx(void)
 {
-	delete data;
+	if(Matrixx::del==0) delete []data;
+	else del = 0;
 }
 
 int Matrixx::getrow(Matrixx t)
@@ -47,74 +53,92 @@ int Matrixx::getcol(Matrixx t)
 {
 	return t.col;
 }
-int Matrixx::printmat(Matrixx t)
-{
-	for (int i=0; i<t.row; i++)
-	{
-		for (int j=0; j<t.col; j++)
-		{
-			cout<<t.data[i*t.col+j]<<" ";
-		}
-		cout<<endl;
-	}
-	return 1;
-}
+
 Matrixx Matrixx::operator + (Matrixx &c)
 {
 	Matrixx temp(row, col);
-	for (int i=0; i<row; i++)
+	temp.del = 1;
+	for (int i = 0; i<row; i++)
 	{
-		for (int j=0; j<col; j++)
+		for (int j = 0; j<col; j++)
 		{
-	temp.data[i*col+j] = data[i*col+j]+c.data[i+col+j];
+			temp.data[i*col + j] = data[i*col + j] + c.data[i*col + j];
 		}
 	}
-    return temp;
+	return temp;
 }
 Matrixx Matrixx::operator * (Matrixx &c)
 {
 	Matrixx temp(row, c.col);
-	for(int i=0; i<row; i++)
+	temp.del = 1;
+	for (int i = 0; i<row; i++)
 	{
-		for(int j=0; j<c.col; j++)
+		for (int j = 0; j<c.col; j++)
 		{
-			for(int k=0; k<col; k++)
+			for (int k = 0; k<col; k++)
 			{
-				temp.data[c.col*i+j]+=data[col*i+k]*c.data[c.col*k+j];
+				temp.data[c.col*i + j] = temp.data[c.col*i + j] + data[col*i + k] * c.data[c.col*k + j];
 			}
 		}
 	}
 	return temp;
 }
 Matrixx & Matrixx::operator = (Matrixx &c)
-   {
-	   delete data;
-       col = c.col;
-       row = c.row;
-	   data = new double[col*row];
-	   for (int i=0; i<row; i++)
-		{
-			for (int j=0; j<col; j++)
-			{
-				data[i*col+j] = c.data[i*col+j];
-			}
-		}
-      return (*this);
-   }
-Matrixx & operator ~(Matrixx &t)
 {
-	Matrixx temp(t.col, t.row);
-	for(int i=0; i<t.col; i++)
+	delete []data;
+	col = c.col;
+	row = c.row;
+	data = new Complex[col*row];
+	for (int i = 0; i<row; i++)
 	{
-		for(int j=0; j<t.row; j++)
+		for (int j = 0; j<col; j++)
 		{
-			temp.data[t.row*i+j]=t.data[t.col*j+i];
+			data[i*col + j] = c.data[i*col + j];
 		}
 	}
-	
-	return temp;
+	return (*this);
 }
-double Matrixx::Matrindex (Matrixx t, int i, int j)
+/*Matrixx & operator ~(Matrixx &t)
 {
-		return data[i*col+j];
+	Matrixx temp(t.col, t.row);
+	temp.del = 1;
+	for (int i = 0; i<t.col; i++)
+	{
+		for (int j = 0; j<t.row; j++)
+		{
+			temp.data[t.col*i + j] = t.data[j*t.row + i];
+		}
+	}
+	return temp;
+}*///РІС‹РґР°РµС‚ РѕС€РёР±РєСѓ РІ Р°СЃСЃРµРјР±Р»РµСЂРµ
+
+Complex& Matrindex(Matrixx& t, int i, int j)
+{
+	return t.data[i*t.col + j];
+
+}
+
+ostream &operator<<(ostream &out, Matrixx &c)
+{
+	for (int i = 0; i<c.row; i++)
+	{
+		for (int j = 0; j<c.col; j++)
+		{
+			out << c.data[i*c.col + j] << " ";
+		}
+		out << "\n";
+	}
+	return out;
+}
+
+istream &operator>>(istream &in, Matrixx &c)
+{
+	for (int i = 0; i<c.row; i++)
+	{
+		for (int j = 0; j<c.col; j++)
+		{
+			in >> c.data[i*c.col + j];
+		}
+	}
+	return in;
 }
