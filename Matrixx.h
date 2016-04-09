@@ -1,10 +1,12 @@
 #pragma once
-//Матрицы: умножение, сложение, транспонирование, получение по индексу
+#include "Complex.h"
+//РњР°С‚СЂРёС†С‹: СѓРјРЅРѕР¶РµРЅРёРµ, СЃР»РѕР¶РµРЅРёРµ, С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРёРµ, РїРѕР»СѓС‡РµРЅРёРµ РїРѕ РёРЅРґРµРєСЃСѓ
 class Matrixx
 {
-	int row, col; //столбцы строчки
+	int row, col; //СЃС‚РѕР»Р±С†С‹ СЃС‚СЂРѕС‡РєРё
+	int del;
 public:
-	double* data;
+	Complex* data;
 	Matrixx(void);
 	Matrixx(int row);
 	Matrixx(int row, int col);
@@ -12,11 +14,12 @@ public:
 
 	int getrow(Matrixx);
 	int getcol(Matrixx);
-	static int printmat(Matrixx);
 	Matrixx & operator = (Matrixx &c);
 	Matrixx operator + (Matrixx &c);
 	Matrixx operator * (Matrixx &c);
-	double Matrindex (Matrixx t, int i, int j);
-	friend Matrixx & operator ~(Matrixx &t);
+	friend Complex& Matrindex(Matrixx& t, int i, int j);
+//	friend Matrixx & operator ~(Matrixx &t);
+	friend ostream &operator<<(ostream &out, Matrixx &c);
+	friend istream &operator>>(istream &in, Matrixx &c);
 };
 
