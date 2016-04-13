@@ -1,7 +1,7 @@
 #pragma once
 class Complex
 {
-	double re, im; // целая и мнимая части
+	double re, im; //Р¦РµР»Р°СЏ Рё РјРЅРёРјР°СЏ С‡Р°СЃС‚Рё
 public:
 	Complex(void);
 	Complex (double r) ;
@@ -19,8 +19,8 @@ public:
  
    Complex operator / (Complex &c);
  
-   friend ostream &operator<<(ostream &, Complex &); // перегрузка оператора <<
-   friend istream &operator>>(istream &, Complex &); // перегрузка оператора >>
+   friend ostream &operator<<(ostream &, Complex &); 
+   friend istream &operator>>(istream &, Complex &); 
  
 };
 
