@@ -6,10 +6,11 @@
 #pragma once
 
 #include "targetver.h"
-
+#include <iostream>
 #include <stdio.h>
 #include <tchar.h>
-
+using namespace std;
+//;
 
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

@@ -24,12 +24,24 @@
     <ClInclude Include="targetver.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="Biblioteka.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Kniga.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="DZ1.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="Biblioteka.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="Kniga.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
