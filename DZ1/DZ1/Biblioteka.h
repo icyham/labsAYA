@@ -1,10 +1,13 @@
 #pragma once
-class Biblioteka
+#include "Kniga.h"
+class Biblioteka:
+	public Kniga
 {
-	Kniga* books;
-	int num;
+	Kniga * id0Book;
+	int num;//колво книг
 public:
 	Biblioteka();
 	~Biblioteka();
+	
 };
 
