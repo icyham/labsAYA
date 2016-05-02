@@ -7,29 +7,31 @@ Complex::Complex(void)
 	re = 0;
 	im = 0;
 }
-Complex::Complex(double r) // конструктор по умолчанию
+Complex::Complex(double r) // конструктор по умолчанию -- это конструктор преобразования
 {
 	re = r;
 	im = 0;
 }
 
-Complex::Complex(double r, double i) // конструктор по умолчанию
+Complex::Complex(double r, double i) // конструктор по умолчанию -- это конструктор с параметрами
 {
 	re = r;
 	im = i;
 }
 
-Complex::Complex(Complex &c) // конструктор копирования
+// такой конструктор генерируется автоматически
+Complex::Complex(Complex &c) // конструктор копирования // const reference
 {
 	re = c.re;
 	im = c.im;
 }
 
+// такой деструктор генерируется автоматически
 Complex::~Complex(void)
 {
 }
-
-Complex & Complex::operator = (Complex &c)
+// такой оператор присваивания генерируется автоматически
+Complex & Complex::operator = (Complex &c) // параметр -- константная ссылка
 {
 	re = c.re;
 	im = c.im;
@@ -37,7 +39,8 @@ Complex & Complex::operator = (Complex &c)
 	return (*this);
 }
 
-Complex Complex::operator + (Complex &c)
+// этот метод константный
+Complex Complex::operator + (Complex &c) // параметр -- константная ссылка
 {
 	Complex temp;
 
@@ -47,7 +50,8 @@ Complex Complex::operator + (Complex &c)
 	return temp;
 }
 
-Complex Complex::operator - (Complex &c)
+// этот метод константный
+Complex Complex::operator - (Complex &c) // параметр -- константная ссылка
 {
 	Complex temp;
 
@@ -57,7 +61,8 @@ Complex Complex::operator - (Complex &c)
 	return temp;
 }
 
-Complex Complex::operator * (Complex &c)
+//
+Complex Complex::operator * (Complex &c) //
 {
 	Complex temp;
 
@@ -76,6 +81,7 @@ ostream &operator<<(ostream &out, Complex &c)
 	return out;
 }
 
+// ввод не соответствует выводу
 istream &operator>>(istream &in, Complex &c)
 {
 	in >> c.re >> c.im;
