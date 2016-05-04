@@ -3,9 +3,11 @@ class Pomesch
 {
 	string name;
 	int id;
-	Pomesch *pnextPom;
 public:
+	Pomesch *pnextPom;
 	Pomesch();
+	Pomesch(string);
+	Pomesch(string, int);
 	~Pomesch();
 	Pomesch & operator = (Pomesch &t)
 	{
@@ -18,6 +20,4 @@ public:
 	{
 		return id;
 	}
-	//friend void newPom(Pomesch* plast , Pomesch* pnew);
-	//friend void obedin(Pomesch* pfirst, Pomesch* psecond);
 };

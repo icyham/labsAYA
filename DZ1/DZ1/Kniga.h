@@ -13,15 +13,18 @@ class Kniga
 {
 	string name;
 	string author;
-	int id;
 	int idPom;
 	int numKat;
 	int* idKat;
 	bool ocifr;
-	
+	int id;
+	string hist;
 public:
+
 	Kniga* pnextBook;
 	Kniga();
+	Kniga(string n, string a);
+	Kniga(string n, string a, int);
 	~Kniga();
 	Kniga & operator = (Kniga &t)
 	{
@@ -34,10 +37,6 @@ public:
 		pnextBook = t.pnextBook;
 		return (*this);
 	}
-	int getid()
-	{
-		return id;
-	}
 	string getname()
 	{
 		return name;
@@ -45,6 +44,10 @@ public:
 	string getauthor()
 	{
 		return author;
+	}
+	int getid()
+	{
+		return id;
 	}
 	int getidPom()
 	{
@@ -61,5 +64,8 @@ public:
 	bool doOcifr();
 	bool download();
 	bool newPomid(int);
+	bool addKat(int);
+	bool delKat(int);
+	string gethist();
 };
 

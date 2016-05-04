@@ -22,6 +22,13 @@ public:
 	Biblioteka();
 	~Biblioteka();
 	Biblioteka & operator = (Biblioteka &t);
+	int newBook(string, string);
+	int newKat(string);
+	int newPom(string);
+	bool delBook(int);
+	bool delKat(int);
+	bool delPom(int);
+	Kniga* BookByid(int);
 	bool Poisk(string);
 	bool List();
 	bool List(char, int);

@@ -3,9 +3,11 @@ class Kategoriya
 {
 	string name;
 	int num;
-	Kategoriya *pnextKat;
 public:
+	Kategoriya *pnextKat;
 	Kategoriya();
+	Kategoriya(string);
+	Kategoriya(string, int);
 	~Kategoriya();
 	Kategoriya & operator = (Kategoriya &t)
 	{
@@ -14,6 +16,9 @@ public:
 		pnextKat = t.pnextKat;
 		return (*this);
 	}
-	int getNum();
+	int getnum()
+	{
+		return num;
+	}
 };
 
