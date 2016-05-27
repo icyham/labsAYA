@@ -28,7 +28,9 @@ public:
 	bool delBook(int);
 	bool delKat(int);
 	bool delPom(int);
+	bool obedPom(int, int);
 	Kniga* BookByid(int);
+	Pomesch* PomByid(int);
 	bool Poisk(string);
 	bool List();
 	bool List(char, int);

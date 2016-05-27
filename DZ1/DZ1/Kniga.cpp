@@ -44,7 +44,7 @@ Kniga::Kniga(string n, string a, int i)
 
 Kniga::~Kniga()
 {
-	delete[] idKat;
+	//delete[] idKat;
 }
 
 bool Kniga::doOcifr()
@@ -126,4 +126,10 @@ bool Kniga::delKat(int a)
 string Kniga::gethist()
 {
 	return this->hist;
+}
+
+ostream &operator<<(ostream &out, Kniga &c)
+{
+	out << "id: " << c.id << " " << c.author << " - " << c.name << "\n" << c.hist;
+	return out;
 }

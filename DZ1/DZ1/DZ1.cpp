@@ -25,6 +25,7 @@
 int main()
 {
 	setlocale(LC_ALL, "rus");
+	startuse();
 	system("pause");
 	return 0;
 }

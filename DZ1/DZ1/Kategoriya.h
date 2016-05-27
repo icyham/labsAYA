@@ -18,7 +18,7 @@ public:
 	}
 	int getnum()
 	{
-		return num;
+		return this->num;
 	}
 };
 

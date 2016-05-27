@@ -16,8 +16,15 @@ public:
 		pnextPom = t.pnextPom;
 		return (*this);
 	}
+	Pomesch operator + (Pomesch &c)
+	{
+		Pomesch temp;
+		temp.name = this->name + "-" + c.name;
+		temp.id = this->id;
+		return temp;
+	}
 	int getid()
 	{
-		return id;
+		return this->id;
 	}
 };

@@ -39,27 +39,27 @@ public:
 	}
 	string getname()
 	{
-		return name;
+		return this->name;
 	}
 	string getauthor()
 	{
-		return author;
+		return this->author;
 	}
 	int getid()
 	{
-		return id;
+		return this->id;
 	}
 	int getidPom()
 	{
-		return idPom;
+		return this->idPom;
 	}
 	int getnumKat()
 	{
-		return numKat;
+		return this->numKat;
 	}
 	int* getidKat()
 	{
-		return idKat;
+		return this->idKat;
 	}
 	bool doOcifr();
 	bool download();
@@ -67,5 +67,6 @@ public:
 	bool addKat(int);
 	bool delKat(int);
 	string gethist();
+	friend ostream &operator<<(ostream &out, Kniga &c);
 };
 

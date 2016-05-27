@@ -14,18 +14,18 @@ Biblioteka::Biblioteka()
 Biblioteka::~Biblioteka()
 {
 	Kniga *temp;
-	while (p0Book->pnextBook != NULL)
+	/*while (p0Book != NULL)
 	{
 		temp = p0Book;
-		while (temp->pnextBook != NULL)
+		/*while (temp->pnextBook != NULL)
 		{
 			temp = temp->pnextBook;
-		}
-		delete temp;
-	}
+		}*
+		//delete temp;
+	}*/
 	delete p0Book;
-	Pomesch *temp1;
-	while (p0Pom->pnextPom != NULL)
+	/*Pomesch *temp1;
+	while (p0Pom != NULL)
 	{
 		temp1 = p0Pom;
 		while (temp1->pnextPom != NULL)
@@ -33,10 +33,10 @@ Biblioteka::~Biblioteka()
 			temp1 = temp1->pnextPom;
 		}
 		delete temp1;
-	}
+	}*/
 	delete p0Pom;
-	Kategoriya *temp2;
-	while (p0Kat->pnextKat != NULL)
+	/*Kategoriya *temp2;
+	while (p0Kat != NULL)
 	{
 		temp2 = p0Kat;
 		while (temp2->pnextKat != NULL)
@@ -44,7 +44,7 @@ Biblioteka::~Biblioteka()
 			temp2 = temp2->pnextKat;
 		}
 		delete temp2;
-	}
+	}*/
 	delete p0Kat;
 }
 
@@ -61,37 +61,38 @@ Biblioteka & Biblioteka::operator = (Biblioteka &t)
 int Biblioteka::newBook(string n, string a)
 {
 	Kniga *temp = p0Book;
-	while (p0Book->pnextBook != NULL)
+	while (temp->pnextBook != NULL)
 	{
 		temp = temp->pnextBook;
 	}
-	Kniga* c = new Kniga(n, a, temp->getid+1);
+	Kniga* c = new Kniga(n, a, temp->getid()+1);
 	temp->pnextBook = c;
-	return c->getid;
+	num++;
+	return c->getid();
 }
 
 int Biblioteka::newKat(string a)
 {
 	Kategoriya *temp = p0Kat;
-	while (p0Kat->pnextKat != NULL)
+	while (temp->pnextKat != NULL)
 	{
 		temp = temp->pnextKat;
 	}
-	Kategoriya* c = new Kategoriya(a, temp->getnum + 1);
+	Kategoriya* c = new Kategoriya(a, temp->getnum() + 1);
 	temp->pnextKat = c;
-	return c->getnum;
+	return c->getnum();
 }
 
 int Biblioteka::newPom(string a)
 {
 	Pomesch *temp = p0Pom;
-	while (p0Pom->pnextPom != NULL)
+	while (temp->pnextPom != NULL)
 	{
 		temp = temp->pnextPom;
 	}
-	Pomesch* c = new Pomesch(a, temp->getid + 1);
+	Pomesch* c = new Pomesch(a, temp->getid() + 1);
 	temp->pnextPom = c;
-	return c->getid;
+	return c->getid();
 }
 
 // Удаление компонента из списка
@@ -100,7 +101,7 @@ bool Biblioteka::delBook(int i)
 {
 	Kniga *temp;
 	temp = p0Book;
-	if (p0Book->getid == i)
+	if (p0Book->getid() == i)
 	{
 		temp = p0Book->pnextBook;
 		delete p0Book;
@@ -108,11 +109,12 @@ bool Biblioteka::delBook(int i)
 	}
 	while (temp->pnextBook != NULL)
 	{
-		if (temp->pnextBook->getid == i)
+		if (temp->pnextBook->getid() == i)
 		{
 			Kniga *temp2 = temp->pnextBook->pnextBook;
 			delete temp->pnextBook;
 			temp->pnextBook = temp2;
+			num--;
 			return 1;
 		}
 		temp = temp->pnextBook;
@@ -124,7 +126,7 @@ bool Biblioteka::delKat(int i)
 {
 	Kategoriya *temp;
 	temp = p0Kat;
-	if (p0Kat->getnum == i)
+	if (p0Kat->getnum() == i)
 	{
 		temp = p0Kat->pnextKat;
 		delete p0Kat;
@@ -132,7 +134,7 @@ bool Biblioteka::delKat(int i)
 	}
 	while (temp->pnextKat != NULL)
 	{
-		if (temp->pnextKat->getnum == i)
+		if (temp->pnextKat->getnum() == i)
 		{
 			Kategoriya *temp2 = temp->pnextKat->pnextKat;
 			delete temp->pnextKat;
@@ -148,7 +150,7 @@ bool Biblioteka::delPom(int i)
 {
 	Pomesch *temp;
 	temp = p0Pom;
-	if (p0Pom->getid == i)
+	if (p0Pom->getid() == i)
 	{
 		temp = p0Pom->pnextPom;
 		delete p0Pom;
@@ -156,7 +158,7 @@ bool Biblioteka::delPom(int i)
 	}
 	while (temp->pnextPom != NULL)
 	{
-		if (temp->pnextPom->getid == i)
+		if (temp->pnextPom->getid() == i)
 		{
 			Pomesch *temp2 = temp->pnextPom->pnextPom;
 			delete temp->pnextPom;
@@ -168,13 +170,46 @@ bool Biblioteka::delPom(int i)
 	return 0;
 }
 
+Pomesch* Biblioteka::PomByid(int a)
+{
+	Pomesch *temp;
+	temp = p0Pom;
+	while (temp != NULL)
+	{
+		if (temp->getid() == a)
+		{
+			return temp;
+		}
+		temp = temp->pnextPom;
+	}
+	return NULL;
+}
+
+bool Biblioteka::obedPom(int id1, int id2)
+{
+	*PomByid(id1) = (*PomByid(id1) + *PomByid(id2));
+	Kniga *temp;
+	int k = 0;
+	temp = p0Book;
+	while (temp != NULL)
+	{
+		if (temp->getidPom() == id2)
+		{
+			temp->newPomid(id1);
+		}
+		temp = temp->pnextBook;
+	}
+	delPom(id2);
+	return 1;
+}
+
 Kniga* Biblioteka::BookByid(int a)
 {
 	Kniga *temp;
 	temp = p0Book;
-	while (temp->pnextBook != NULL)
+	while (temp != NULL)
 	{
-		if (temp->getid == a)
+		if (temp->getid() == a)
 		{
 			return temp;
 		}
@@ -188,12 +223,12 @@ bool Biblioteka::Poisk(string a)
 	Kniga *temp;
 	int k = 0;
 	temp = p0Book;
-	while (temp->pnextBook != NULL)
+	while (temp != NULL)
 	{
-		if (a==temp->getname || a==temp->getauthor)//string == name || author
+		if (a == temp->getname() || a == temp->getauthor())
 		{
 			k++;
-			cout << "id " << temp->getid << " " << temp->getauthor << " \"" << temp->getname << "\"" << endl;
+			cout << "id " << temp->getid() << " " << temp->getauthor() << " \"" << temp->getname() << "\"" << endl;
 		}
 		temp = temp->pnextBook;
 	}
@@ -207,11 +242,12 @@ bool Biblioteka::List()
 	Kniga *temp;
 	temp = p0Book;
 	cout << "Всего " << num << "книг" << endl;
-	while (temp->pnextBook != NULL)
+	while (temp != NULL)
 	{
-		cout << "id " << temp->getid << " " << temp->getauthor << " \"" << temp->getname << "\"" << endl;
+		cout << "id " << temp->getid() << " " << temp->getauthor() << " \"" << temp->getname() << "\"" << endl;
 		temp = temp->pnextBook;
 	}
+
 	return 1;
 }
 
@@ -222,12 +258,12 @@ bool Biblioteka::List(char a, int t)
 	temp = p0Book;
 	if (a == 'p' || a == 'P')
 	{
-		while (temp->pnextBook != NULL)
+		while (temp != NULL)
 		{
-			if (temp->getidPom == t)
+			if (temp->getidPom() == t)
 			{
 				k++;
-				cout << "id " << temp->getid << " " << temp->getauthor << " \"" << temp->getname << "\"" << endl;
+				cout << "id " << temp->getid() << " " << temp->getauthor() << " \"" << temp->getname() << "\"" << endl;
 			}
 			temp = temp->pnextBook;
 		}
@@ -235,14 +271,14 @@ bool Biblioteka::List(char a, int t)
 	}
 	else if (a == 'k' || a == 'K')
 	{
-		while (temp->pnextBook != NULL)
+		while (temp != NULL)
 		{
 			for (int i = 0; i < temp->getnumKat(); i++)
 			{
 				if (temp->getidKat()[i] == t)
 				{
 					k++;
-					cout << "id " << temp->getid << " " << temp->getauthor << " \"" << temp->getname << "\"" << endl;
+					cout << "id " << temp->getid() << " " << temp->getauthor() << " \"" << temp->getname() << "\"" << endl;
 				}
 			}
 			temp = temp->pnextBook;
