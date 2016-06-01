@@ -14,37 +14,49 @@ Biblioteka::Biblioteka()
 Biblioteka::~Biblioteka()
 {
 	Kniga *temp;
-	/*while (p0Book != NULL)
+	while (p0Book->pnextBook != NULL)
 	{
 		temp = p0Book;
-		/*while (temp->pnextBook != NULL)
+		while (temp->pnextBook->pnextBook != NULL)
 		{
 			temp = temp->pnextBook;
-		}*
-		//delete temp;
-	}*/
+		}
+		if (temp->pnextBook)
+		{
+			delete temp->pnextBook;
+			temp->pnextBook = NULL;
+		}
+	}
 	delete p0Book;
-	/*Pomesch *temp1;
-	while (p0Pom != NULL)
+	Pomesch *temp1;
+	while (p0Pom->pnextPom != NULL)
 	{
 		temp1 = p0Pom;
-		while (temp1->pnextPom != NULL)
+		while (temp1->pnextPom->pnextPom != NULL)
 		{
 			temp1 = temp1->pnextPom;
 		}
-		delete temp1;
-	}*/
+		if (temp1->pnextPom)
+		{
+			delete temp1->pnextPom;
+			temp1->pnextPom = NULL;
+		}
+	}
 	delete p0Pom;
-	/*Kategoriya *temp2;
-	while (p0Kat != NULL)
+	Kategoriya *temp2;
+	while (p0Kat->pnextKat != NULL)
 	{
 		temp2 = p0Kat;
-		while (temp2->pnextKat != NULL)
+		while (temp2->pnextKat->pnextKat != NULL)
 		{
 			temp2 = temp2->pnextKat;
 		}
-		delete temp2;
-	}*/
+		if (temp2->pnextKat)
+		{
+			delete temp2->pnextKat;
+			temp2->pnextKat = NULL;
+		}
+	}
 	delete p0Kat;
 }
 
@@ -60,39 +72,68 @@ Biblioteka & Biblioteka::operator = (Biblioteka &t)
 // Включение в список нового компонента
 int Biblioteka::newBook(string n, string a)
 {
-	Kniga *temp = p0Book;
-	while (temp->pnextBook != NULL)
+	if (p0Book->getid() == 0)
 	{
-		temp = temp->pnextBook;
+		delete p0Book;
+		Kniga* c = new Kniga(n, a, 1);
+		p0Book = c;
 	}
-	Kniga* c = new Kniga(n, a, temp->getid()+1);
-	temp->pnextBook = c;
-	num++;
-	return c->getid();
+	else{
+		Kniga *temp = p0Book;
+		while (temp->pnextBook != NULL)
+		{
+			temp = temp->pnextBook;
+		}
+		Kniga* c = new Kniga(n, a, temp->getid() + 1);
+		temp->pnextBook = c;
+		num++;
+		return c->getid();
+	}
+	return 1;
 }
 
 int Biblioteka::newKat(string a)
 {
-	Kategoriya *temp = p0Kat;
-	while (temp->pnextKat != NULL)
+	if (p0Kat->getnum() == 0)
 	{
-		temp = temp->pnextKat;
+		delete p0Kat;
+		Kategoriya* c = new Kategoriya(a, 1);
+		p0Kat = c;
 	}
-	Kategoriya* c = new Kategoriya(a, temp->getnum() + 1);
-	temp->pnextKat = c;
-	return c->getnum();
+	else
+	{
+		Kategoriya *temp = p0Kat;
+		while (temp->pnextKat != NULL)
+		{
+			temp = temp->pnextKat;
+		}
+		Kategoriya* c = new Kategoriya(a, temp->getnum() + 1);
+		temp->pnextKat = c;
+		return c->getnum();
+	}
+	return 1;
 }
 
 int Biblioteka::newPom(string a)
 {
-	Pomesch *temp = p0Pom;
-	while (temp->pnextPom != NULL)
+	if (p0Pom->getid() == 0)
 	{
-		temp = temp->pnextPom;
+		delete p0Pom;
+		Pomesch* c = new Pomesch(a, 1);
+		p0Pom = c;
 	}
-	Pomesch* c = new Pomesch(a, temp->getid() + 1);
-	temp->pnextPom = c;
-	return c->getid();
+	else
+	{
+		Pomesch *temp = p0Pom;
+		while (temp->pnextPom != NULL)
+		{
+			temp = temp->pnextPom;
+		}
+		Pomesch* c = new Pomesch(a, temp->getid() + 1);
+		temp->pnextPom = c;
+		return c->getid();
+	}
+	return 1;
 }
 
 // Удаление компонента из списка

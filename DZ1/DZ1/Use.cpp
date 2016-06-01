@@ -20,11 +20,11 @@ void startuse()
 	{
 		cin >> command;
 		if (!command.compare(0, 4, "help")) {
-			cout << "\nДобавить книгу - addbook name author\nУдалить книгу - delbook id\nНайти книгу - find name/author\nДобавить категорию - addkat name\nУдалить категорию - delkat id\nДобавить помещение - addpom name\nУдалить помещение - delpom id\nОбъединить помещения - obedpom id1 id2\nСписок книг - list\nКниги категории - listk idk\nКниги в помещении - listp idp\nОцифровать книгу - ocifr id\nСкачать оцифрованную книгу - download id\nПереместить книгу в помещение - booktopom idb idp\nДобавить книге категорию - bookaddkat idb idk\nУдалить у книги категорию - bookdelkat idb idk\nИстория книги - hist id"<<endl;
+			cout << "\nДобавить книгу - addbook author name\nУдалить книгу - delbook id\nНайти книгу - find name/author\nДобавить категорию - addkat name\nУдалить категорию - delkat id\nДобавить помещение - addpom name\nУдалить помещение - delpom id\nОбъединить помещения - obedpom id1 id2\nСписок книг - list\nКниги категории - listk idk\nКниги в помещении - listp idp\nОцифровать книгу - ocifr id\nСкачать оцифрованную книгу - download id\nПереместить книгу в помещение - booktopom idb idp\nДобавить книге категорию - bookaddkat idb idk\nУдалить у книги категорию - bookdelkat idb idk\nИстория книги - hist id"<<endl;
 		}
 		if (!command.compare(0, 7, "addbook")) {
 			string n, a;
-			cin >> n >> a;
+			cin >> a >> n;
 
 			b.newBook(n, a);
 		}

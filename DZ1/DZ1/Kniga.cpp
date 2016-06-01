@@ -44,7 +44,8 @@ Kniga::Kniga(string n, string a, int i)
 
 Kniga::~Kniga()
 {
-	//delete[] idKat;
+	if (idKat)
+	delete[] idKat;
 }
 
 bool Kniga::doOcifr()
